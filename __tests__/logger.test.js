@@ -13,20 +13,20 @@ describe('logger tests', () => {
         // jest.clearAllTimers()
         // jest.clearAllMocks()
     })
-    test('pickup logger test', (done) => {
+    test.only('pickup logger test', (done) => {
         events.emit('pickup', {});
         jest.runAllTimers()
         expect(consoleSpy).toHaveBeenCalled()
         done()
 
     })
-    test('delivered logger test', (done) => {
+    test.only('delivered logger test', (done) => {
         events.emit('delivered', {});
         jest.runAllTimers()
         expect(consoleSpy).toHaveBeenCalled();
         done()
     })
-    test('in-transit logger test', (done) => {
+    test.only('in-transit logger test', (done) => {
         events.emit('in-transit', {});
         jest.runAllTimers()
         expect(consoleSpy).toHaveBeenCalled();

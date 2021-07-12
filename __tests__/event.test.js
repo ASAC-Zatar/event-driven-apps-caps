@@ -25,19 +25,19 @@ describe('events handler tests', () => {
         customerName: faker.name.findName(),
         address:faker.address.streetAddress(),
     }
-    test('pick up handler test',(done) => {
+    test.only('pick up handler test',(done) => {
         events.emit('pickup',order)
         jest.runAllTimers();
         expect(console.log).toHaveBeenCalled();
         done()
     })
-    test('delivered handler test',(done) => {
+    test.only('delivered handler test',(done) => {
         events.emit('delivered',order)
         jest.runAllTimers()
         expect(console.log).toHaveBeenCalled();
         done()
     })
-    test('in-transit handler test',(done) => {
+    test.only('in-transit handler test',(done) => {
         events.emit('in-transit',order)
         jest.runAllTimers();
         expect(console.log).toHaveBeenCalled();
