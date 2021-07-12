@@ -11,10 +11,13 @@ require('../logger');
 describe('events handler tests', () => {
 
     beforeEach(()=>{
-        jest.useFakeTimers();
         jest.spyOn(global.console,'log');
+        jest.useFakeTimers();
       })
-
+      afterEach(()=>{
+        jest.spyOn(global.console,'log').mockRestore(); 
+        jest.clearAllTimers()
+    })
     let order = {
         orderId: uuid(),
         storeName: store,
@@ -28,6 +31,7 @@ describe('events handler tests', () => {
     })
     test('delivered handler test',() => {
         events.emit('delivered',order)
+        jest.runAllTimers()
         expect(console.log).toHaveBeenCalled();
     })
     test('in-transit handler test',() => {
