@@ -18,6 +18,7 @@ describe('events handler tests', () => {
       afterEach(()=>{
         jest.spyOn(global.console,'log').mockRestore(); 
         jest.clearAllTimers()
+        jest.clearAllMocks()
     })
     let order = {
         orderId: uuid(),

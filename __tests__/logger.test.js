@@ -12,6 +12,7 @@ describe('logger tests',()=>{
     afterEach(()=>{
         consoleSpy.mockRestore(); 
         jest.clearAllTimers()
+        jest.clearAllMocks()
     })
     test('pickup logger test',()=>{
         events.emit('pickup',{});
