@@ -1,33 +1,35 @@
 'use strict';
 const events = require('../events');
 require('../logger');
-describe('logger tests',()=>{
+describe('logger tests', () => {
     let consoleSpy;
-    beforeEach(()=>{
-        consoleSpy=jest.spyOn(console,'log').mockImplementation();
+    beforeEach(() => {
+        consoleSpy = jest.spyOn(console, 'log').mockImplementation();
         jest.useFakeTimers();
-        jest.retryTimes(1)
 
     })
-    afterEach((done)=>{
-        consoleSpy.mockRestore(); 
-        jest.clearAllTimers()
-        jest.clearAllMocks()
+    afterEach(() => {
+        consoleSpy.mockRestore();
+        // jest.clearAllTimers()
+        // jest.clearAllMocks()
+    })
+    test('pickup logger test', (done) => {
+        events.emit('pickup', {});
+        jest.runAllTimers()
+        expect(consoleSpy).toHaveBeenCalled()
+        done()
+
+    })
+    test('delivered logger test', (done) => {
+        events.emit('delivered', {});
+        jest.runAllTimers()
+        expect(consoleSpy).toHaveBeenCalled();
         done()
     })
-    test('pickup logger test',()=>{
-        events.emit('pickup',{});
+    test('in-transit logger test', (done) => {
+        events.emit('in-transit', {});
         jest.runAllTimers()
         expect(consoleSpy).toHaveBeenCalled();
-    })
-    test('delivered logger test',()=>{
-        events.emit('delivered',{});
-        jest.runAllTimers()
-        expect(consoleSpy).toHaveBeenCalled();
-    })
-    test('in-transit logger test',()=>{
-        events.emit('in-transit',{});
-        jest.runAllTimers()
-        expect(consoleSpy).toHaveBeenCalled();
+        done()
     })
 })

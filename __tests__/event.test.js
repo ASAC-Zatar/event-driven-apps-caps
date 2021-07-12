@@ -13,13 +13,11 @@ describe('events handler tests', () => {
     beforeEach(()=>{
         jest.spyOn(global.console,'log');
         jest.useFakeTimers();
-        jest.retryTimes(1)
       })
-      afterEach((done)=>{
+      afterEach(()=>{
         jest.spyOn(global.console,'log').mockRestore(); 
-        jest.clearAllTimers()
-        jest.clearAllMocks()
-        done()
+        // jest.clearAllTimers()
+        // jest.clearAllMocks()
     })
     let order = {
         orderId: uuid(),
@@ -27,20 +25,23 @@ describe('events handler tests', () => {
         customerName: faker.name.findName(),
         address:faker.address.streetAddress(),
     }
-    test('pick up handler test',() => {
+    test('pick up handler test',(done) => {
         events.emit('pickup',order)
         jest.runAllTimers();
         expect(console.log).toHaveBeenCalled();
+        done()
     })
-    test('delivered handler test',() => {
+    test('delivered handler test',(done) => {
         events.emit('delivered',order)
         jest.runAllTimers()
         expect(console.log).toHaveBeenCalled();
+        done()
     })
-    test('in-transit handler test',() => {
+    test('in-transit handler test',(done) => {
         events.emit('in-transit',order)
         jest.runAllTimers();
         expect(console.log).toHaveBeenCalled();
+        done()
     })
 })
 
