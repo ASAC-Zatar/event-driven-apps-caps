@@ -15,10 +15,11 @@ describe('events handler tests', () => {
         jest.useFakeTimers();
         jest.retryTimes(1)
       })
-      afterEach(()=>{
+      afterEach((done)=>{
         jest.spyOn(global.console,'log').mockRestore(); 
         jest.clearAllTimers()
         jest.clearAllMocks()
+        done()
     })
     let order = {
         orderId: uuid(),

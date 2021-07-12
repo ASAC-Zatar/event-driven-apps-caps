@@ -9,10 +9,11 @@ describe('logger tests',()=>{
         jest.retryTimes(1)
 
     })
-    afterEach(()=>{
+    afterEach((done)=>{
         consoleSpy.mockRestore(); 
         jest.clearAllTimers()
         jest.clearAllMocks()
+        done()
     })
     test('pickup logger test',()=>{
         events.emit('pickup',{});
