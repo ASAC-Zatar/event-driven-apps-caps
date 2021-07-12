@@ -6,6 +6,8 @@ describe('logger tests',()=>{
     beforeEach(()=>{
         consoleSpy=jest.spyOn(console,'log').mockImplementation();
         jest.useFakeTimers();
+        jest.retryTimes(1)
+
     })
     afterEach(()=>{
         consoleSpy.mockRestore(); 

@@ -13,6 +13,7 @@ describe('events handler tests', () => {
     beforeEach(()=>{
         jest.spyOn(global.console,'log');
         jest.useFakeTimers();
+        jest.retryTimes(1)
       })
       afterEach(()=>{
         jest.spyOn(global.console,'log').mockRestore(); 
